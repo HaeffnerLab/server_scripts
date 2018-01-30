@@ -1,0 +1,13 @@
+# to pass an argument: gnuplot -e "filename='foo.data'" -e "outfile='out.png'" foo.plg
+# then access the argument by plot filename
+
+
+set datafile separator ","
+set grid
+set title mytitle
+set ylabel "Excitation"
+set term png
+set output outfile
+set pointintervalbox 3
+plot for [i=2:N] filename using 1:i with linespoints lw 2 pt 7 pi -1 ps 1.5 title "Col ".i
+

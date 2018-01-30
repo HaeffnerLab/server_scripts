@@ -35,7 +35,11 @@ hlp_last_scan="-1"
 # Remove last couple files to make sure that updated
 # data files are replotted.
 cd $LOCAL_GNU_FOLDER/$MYDATE
-ls -t | head -n 8 | xargs rm -f
+
+files=$(shopt -s nullglob dotglob; `echo $LOCAL_GNU_FOLDER/$MYDATE/*`)
+if [ ${#files[@]} -gt 1 ]; then
+  ls -t | head -n 1 | xargs rm -f
+fi
 
 cd $LOCAL_PYPLOT_FOLDER 
 

@@ -151,6 +151,7 @@ for k in range(no_of_files):
         if no_of_graphs_plotted == 5:
             no_of_graphs_plotted = 0
             current_file_no -= 1
+            print "made it here\n"
         continue
     else:
         pickle_list.insert(0, lines[0])
@@ -167,6 +168,9 @@ for k in range(no_of_files):
     
 
     if no_of_graphs_plotted == 5:
+        no_of_graphs_plotted = 0
+        current_file_no -= 1 
+        
         try:
             temp_file = open(list_of_files[k+1], "r")
             lines_temp = temp_file.read().split("\n")
@@ -177,9 +181,6 @@ for k in range(no_of_files):
             print "Reached last element"
 
         # change the file
-        no_of_graphs_plotted = 0
-
-        current_file_no -= 1 
         if current_file_no < 0:
            continue 
 
@@ -205,17 +206,8 @@ print "TOTAL PLOTTED: ", plotted_count
 
 
 html_text = "</body>\</html>\n"
-if file_exists and filelines != []:
-    file.writelines(filelines)
-    file.write("\n")
-    file.close()
-else:
-    try:
-        file.write(html_text + "\n")
-        file.close()
-    except ValueError:
-        # file was already closed in loop
-        pass
+file.write(html_text + "\n")
+file.close()
 with open(list_of_files_pickle, "wb") as pickle_out:
     pickle.dump(pickle_list, pickle_out)
 
